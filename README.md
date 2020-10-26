@@ -1,4 +1,4 @@
-# Project Proposal
+# Project Proposal (COVID's effect on small businesses)
 
 
 ## Domain of Interest
