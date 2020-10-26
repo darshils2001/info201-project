@@ -32,4 +32,8 @@
   - 13 features of Company, Location, Number of those laid off, Date, Percent of workforce laid off, Industry the company served/serves, Source for data, List of employees laid off, Stage, Money Raised, Country, Date added, and reference
   - This dataset can give some global context to areas hit hard (in the tech industry) by the pandemic. We can also see if there is a tech business that is essentially "too small" to survive in this recession.
 
-  
+3. [Third source]() provides.
+  - Collected from .
+  - This dataset has  rows since 
+  -  features of 
+  - This dataset can 
