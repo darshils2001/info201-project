@@ -2,10 +2,10 @@
 
 
 ## Domain of Interest
-**Topics of Interest**
-1. Relevant to everyone, affecting all of us.
-2. Interested to know the scope of such a global recession, and how it affects small business owners.
-3. The federal response has been highly politicized, with White House aides openly sharing their discontent for “Blue” states; interested to see if there be a difference in business closings that relate to the 2016 electoral college map.
+**Why are you interested in this field/domain?**
+1. It's relevant to everyone, affecting all of us.
+2. We're interested to know the scope of such a global recession, and how it affects small business owners.
+3. The federal response has been highly politicized, with White House aides openly sharing their discontent for “Blue” states; we're interested to see if there be a difference in business closings that relate to the 2016 electoral college map.
 
 **Related Projects/Studies**
 1. [PNAS](https://www.pnas.org/content/117/30/17656) economic impact study on over 5,800 small businesses in the United States
@@ -13,10 +13,10 @@
 3. [McKinsey & Co.](https://www.mckinsey.com/~/media/McKinsey/Featured%20Insights/Americas/Which%20small%20businesses%20are%20most%20vulnerable%20to%20COVID%2019%20and%20when/Which-small-businesses-are-most-vulnerable-to-COVID-19-and-when-final.pdf) consulting firm paper on which small businesses are most vulnerable to COVID-19/the subsequent recession.
 
 **Data-Driven Questions**
-1. How many businesses have closed across the US during the pandemic, where are they clustered/located?
+1. How many businesses have closed across the US during the pandemic and where are they clustered/located?
 2. What was the average income of businesses that closed during the pandemic? (How much profit did these businesses need to be making to stay afloat?)
-3. How many people were on payroll of businesses that closed vs. stayed open?
-4. Was there a peak during a specific date for unemployment claims? Or have they remained about the same throughout the pandemic.
+3. How many people were on the payroll of businesses that closed vs. stayed open?
+4. Was there a peak during a specific date for unemployment claims? Or have they remained about the same throughout the pandemic?
 
 ## Identified Datasets
 
