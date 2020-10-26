@@ -32,7 +32,7 @@
   - 13 features of Company, Location, Number of those laid off, Date, Percent of workforce laid off, Industry the company served/serves, Source for data, List of employees laid off, Stage, Money Raised, Country, Date added, and reference
   - This dataset can give some global context to areas hit hard (in the tech industry) by the pandemic. We can also see if there is a tech business that is essentially "too small" to survive in this recession.
 
-3. [Third source](https://portal.census.gov/pulse/data/#data) provides.
+3. [Census Bureau](https://portal.census.gov/pulse/data/#data) provides information about work sectors and how much they were affected by COVID.
   - Collected from the United States Census Bureau.
   - This dataset has 1905 rows since October 4th, 2020.
   -  5 features of Work Sector, Instrument ID, Answer ID (measures the positive or negative effect COVID has had on the business), Percentage (of businesses affected in the selected sector) and Standard Error. 
