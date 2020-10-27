@@ -3,9 +3,9 @@
 
 ## Domain of Interest
 **Why are you interested in this field/domain?**
-1. It's relevant to everyone, affecting all of us.
-2. We're interested to know the scope of such a global recession, and how it affects small business owners.
-3. The federal response has been highly politicized, with White House aides openly sharing their discontent for “Blue” states; we're interested to see if there be a difference in business closings that relate to the 2016 electoral college map.
+1. Every individual is experiencing the effects of the Coronavirus pandemic in some way, shape, or form, just as we all bear responsibility for slowing its spread. Nine months of lockdown, well over a quarter of a million Americans dead, and millions more infected have lead to one of the largest mass casualty events in our history. A brutal virus that relegates individuals to their homes is the enemy of the small business, with tens of thousands closing in the wake of our economic downturn.
+2. We know that the recession/depression has resulted in the permanent closure of thousands of small businesses in the wake of COVID-19. What is the scope of this devastation? Is there a business size most likely to close, or is the likelihood of closure more tied to profit/ expenditure per employee? Local businesses are integral to every community, with certain establishments gaining a special or cult status with its residents. What is Seattle without Dick's Drive-In? What about your favorite local coffee shop on the Ave? These establishments who do not have the luxury of being "too big to fail" are currently in a perilous position - what is our government doing about it?
+3. The federal response to Coronavirus relief has been highly politicized, with White House aides openly sharing their discontent for “Blue” states. Just as every citizen has to deal with the Coronavirus, we all bear a burden of our federal response (or lack thereof). Does the difference in business closures also fall into these partisan lines? Or, like the virus, do populated/heavily concentrated areas see higher business closures compared to rural America? 
 
 **Related Projects/Studies**
 1. [PNAS](https://www.pnas.org/content/117/30/17656) economic impact study on over 5,800 small businesses in the United States
@@ -35,5 +35,5 @@
 3. [Census Bureau](https://portal.census.gov/pulse/data/#data) provides information about work sectors and how much they were affected by COVID.
   - Collected from the United States Census Bureau.
   - This dataset has 1905 rows since October 4th, 2020.
-  -  5 features of Work Sector, Instrument ID, Answer ID (measures the positive or negative effect COVID has had on the business), Percentage (of businesses affected in the selected sector) and Standard Error. 
-  - This dataset can answer questions about what sectors of the American economy were hit the hardest by COVID and which sectors had the most favorable outcomes. 
+  -  5 features of Work Sector, Instrument ID, Answer ID (measures the positive or negative effect COVID has had on the business), Percentage (of businesses affected in the selected sector) and Standard Error.
+  - This dataset can answer questions about what sectors of the American economy were hit the hardest by COVID and which sectors had the most favorable outcomes.
