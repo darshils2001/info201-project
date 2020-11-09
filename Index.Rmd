@@ -3,4 +3,4 @@ title: "Info 201 Project"
 output: html_document
 ---
 
-# Introduction coming soon 
+# Introduction 
