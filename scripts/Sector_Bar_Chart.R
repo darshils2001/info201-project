@@ -43,16 +43,3 @@ average_random_sectors <- random_sectors %>%
   summarize(
     AVERAGE_PERCENT = mean(ESTIMATE_PERCENTAGE)
   )
-
-# Create Bar Chart
-ggplot(data = average_random_sectors) +
-  geom_col(
-    mapping = aes(x = NAICS_SECTOR, y = AVERAGE_PERCENT),
-    fill = "#FF6666"
-  ) +
-  labs(
-    title = "Work Sector versus Percent of Businesses Affected by
-             COVID-19",
-    x = "Work Sector",
-    y = "Percentage of Businesses Affected"
-  )
