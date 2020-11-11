@@ -47,9 +47,8 @@ a certain extent.
 
 
 ## Chart 2 (Unemployment Scatter Plot)
-```{r, echo = FALSE}
-unemployment_plot <- ggplot(data = non_seasonal_adjusted,
-                            aes(x = Date, y = N.S.A, group = 1)) +
+```{r unemployment_plot, echo = FALSE, warning= FALSE}
+ggplot(data = non_seasonal_adjusted, aes(x = Date, y = N.S.A, group = 1)) +
   geom_line() +
   geom_point() +
   labs(title = "Initial Unemployment Claims Per Week",
