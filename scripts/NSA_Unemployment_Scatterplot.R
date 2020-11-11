@@ -11,8 +11,12 @@ non_seasonal_adjusted <- unemployment %>%
   summarise(Date, N.S.A)
 
 #Build a scatterplot, but without connecting line
-unemployment_plot <- ggplot(data = Non_Seasonal_Adjusted) +
-  geom_point(mapping = aes(x = Date, y = N.S.A)) +
+unemployment_plot <- ggplot(data = non_seasonal_adjusted,
+                            aes(x = Date, y = N.S.A, group = 1)) +
+  geom_line() +
+  geom_point() +
   labs(title = "Initial Unemployment Claims Per Week",
        x = "Date",
        y = "NSA Unemployment Claims")
+
+unemployment_plot
