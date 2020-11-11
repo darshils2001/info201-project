@@ -5,6 +5,14 @@ output: html_document
 
 # Introduction 
 
+Every individual is experiencing the effects of the Coronavirus pandemic in some 
+way, shape, or form, just as we all bear responsibility for slowing its spread. 
+Nine months of lockdown, well over a quarter of a million Americans dead, and 
+millions more infected have lead to one of the largest mass casualty events in 
+our history. A brutal virus that relegates individuals to their homes is the 
+enemy of the small business, with tens of thousands closing in the wake of our 
+economic downturn. This report will look at how the Coronavirus Pandemic has 
+affected different job sectors, unemployment, and **contents of chart 3**.
 
 ```{r setup, include = FALSE}
 source("scripts/Sector_Bar_Chart.R")
