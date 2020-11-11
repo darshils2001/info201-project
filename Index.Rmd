@@ -4,3 +4,33 @@ output: html_document
 ---
 
 # Introduction 
+
+
+```{r setup, include = FALSE}
+source("scripts/Sector_Bar_Chart.R")
+```
+
+## Chart 1 (Sector Bar Chart): 
+``` {r average_random_sectors, echo = FALSE}
+ggplot(data = average_random_sectors) +
+  geom_col(
+    mapping = aes(x = NAICS_SECTOR, y = AVERAGE_PERCENT),
+    fill = "#FF6666"
+  ) +
+  labs(
+    title = "Work Sector versus Percent of Businesses Affected by
+             COVID-19",
+    x = "Work Sector",
+    y = "Average Weekly Percent of Businesses Affected"
+  )
+```
+
+This chart was generated to show the relationship between a job sector and the
+effect COVID-19 has had within businesses in that work sector. 
+
+From the chart we can see that the Management and Utilities sectors were hit
+the hardest with the highest average weekly percentage of businesses affected.
+
+The chart also shows that within the 5 sectors chosen for the report, none of
+them were spared from the effects of COVID-19 as all of them were affected to
+a certain extent.
