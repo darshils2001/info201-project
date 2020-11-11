@@ -16,6 +16,7 @@ affected different job sectors, unemployment, and **contents of chart 3**.
 
 ```{r setup, include = FALSE}
 source("scripts/Sector_Bar_Chart.R")
+source("scripts/NSA_Unemployment_Scatterplot.R")
 ```
 
 ## Chart 1 (Sector Bar Chart): 
@@ -42,3 +43,28 @@ the hardest with the highest average weekly percentage of businesses affected.
 The chart also shows that within the 5 sectors chosen for the report, none of
 them were spared from the effects of COVID-19 as all of them were affected to
 a certain extent.
+
+
+
+## Chart 2 (Unemployment Scatter Plot)
+```{r, echo = FALSE}
+unemployment_plot <- ggplot(data = non_seasonal_adjusted,
+                            aes(x = Date, y = N.S.A, group = 1)) +
+  geom_line() +
+  geom_point() +
+  labs(title = "Initial Unemployment Claims Per Week",
+       x = "Date",
+       y = "NSA Unemployment Claims")
+```
+
+This chart was generated to show the relationship of Non Seasonally Adjusted
+(NSA) unemployment claims per week in the United States since January 4th,
+2020.
+
+From this chart we can clearly see where the pandemic occurred, with a massive 
+spike in unemployment claims that has been steadily decreasing since the initial
+peak in the early pandemic. What this chart does not show are the continued
+unemployment claims, the delta between these two would show the amount of 
+Americans choosing to exit the workforce compared to those still searching for
+employment
+
