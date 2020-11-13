@@ -3,7 +3,7 @@ library("readxl")
 library("tidyverse")
 
 # Load Dataset
-sectors <- read_excel("/Users/Darshil/Documents/INFO201/info201-project/datasets/National_Sector_Dataset.xls")
+sectors <- read_excel("datasets/National_Sector_Dataset.xls")
 
 # Convert Sector Numbers to Names
 sectors$NAICS_SECTOR <- gsub(11, "Agriculture", sectors$NAICS_SECTOR)
