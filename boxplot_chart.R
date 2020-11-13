@@ -36,23 +36,12 @@ sectors$ESTIMATE_PERCENTAGE <- as.numeric(
   gsub("[\\%,]", "", sectors$ESTIMATE_PERCENTAGE)
 )
 
-#Caculate average percentage changes across all sectors
-avg <- mean(sectors$ESTIMATE_PERCENTAGE)
-
-#Calculate average percentages in each sector
-avg_sectors <- sectors %>%
-  group_by(NAICS_SECTOR) %>%
-  summarize(AVERAGE_CHANGES_IN_PERCENTAGE = mean(ESTIMATE_PERCENTAGE))
-
-#Build a combination of a line and bar chart to compare each sector with the
-#average of all sector
-avg_plot <- ggplot(data = avg_sectors) +
-  geom_col(
-    mapping = aes(x = NAICS_SECTOR, 
-                   y = avg_sectors$AVERAGE_CHANGES_IN_PERCENTAGE)
-    ) +
-  labs(title = "Average Revenue Changes in Each Sector 
-       for the Week of October 04 2020",
-       x = "Sector",
-       y = "Average Percent of Businesses Affected") +
-  geom_hline(yintercept = avg, linetype="dashed", color = "red")
+#Build a box plot to compare variance across the sectors
+boxplot(sectors$ESTIMATE_PERCENTAGE~NAICS_SECTOR,
+        data=sectors,
+        main="Percentage Revenue Changes in Each Sector
+        Week of October 04, 2020",
+        xlab="Sector",
+        ylab="Percent",
+        col="orange",       
+        border="brown")
