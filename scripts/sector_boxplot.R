@@ -37,11 +37,14 @@ sectors$ESTIMATE_PERCENTAGE <- as.numeric(
 )
 
 #Build a box plot to compare variance across the sectors
-boxplot(sectors$ESTIMATE_PERCENTAGE~NAICS_SECTOR,
-        data=sectors,
-        main="Percentage Revenue Changes in Each Sector
+ggplot(data = sectors) +
+  geom_boxplot(aes(x = NAICS_SECTOR, y = ESTIMATE_PERCENTAGE,
+                   fill = "orange")) +
+  theme(axis.text.x = element_text(angle = 77, vjust = 0.5),
+        plot.title = element_text(hjust = 0.5)) +
+  labs(
+    title = "Percentage Revenue Changes in Each Sector
         Week of October 04, 2020",
-        xlab="Sector",
-        ylab="Percent",
-        col="orange",       
-        border="brown")
+    x = "Sector",
+    y = "Percent"
+  )
