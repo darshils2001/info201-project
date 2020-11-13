@@ -1,3 +1,4 @@
+
 #Load packages
 library("tidyverse")
 
@@ -8,7 +9,7 @@ unemployment <- read_csv("datasets/DoL_Unemployment.csv")
 national <- read.csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us.csv")
 
 #Take Non Seasonal Adjusted (NSA) Initial Unemployment claims and date since
-#January 4th, 2020 and rename
+#January 4th, 2020 and rename Date column
 non_seasonal_adjusted <- unemployment %>%
   rename(Date = X1) %>%
   mutate(Date = as.Date(Date, format = "%m/%d/%Y")) %>% 
