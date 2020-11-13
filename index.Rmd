@@ -13,7 +13,9 @@ our history. A brutal virus that relegates individuals to their homes is the
 enemy of the small business, with tens of thousands closing in the wake of our 
 economic downturn. This report will look at how the Coronavirus Pandemic has 
 affected unemployment and revenue, and how that effect has been felt across the
-myriad job sectors in the United States.
+myriad job sectors in the United States. We will be looking at which employment
+sectors have been hit the hardest by the virus, and when the worst months
+regarding revenue losses and jobless claims were. 
 
 ```{r setup, include = FALSE}
 source("scripts/Sector_Bar_Chart.R")
