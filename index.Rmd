@@ -32,6 +32,13 @@ revenue effect. With frequent weekly reports (the information sector has filed
 source("scripts/Sector_Bar_Chart.R")
 source("scripts/NSA_Unemployment_Scatterplot.R")
 source("scripts/sector_boxplot.R")
+source("scripts/aggregate_table_sector.R")
+```
+
+## Aggregate Table
+```{r echo = FALSE, results = 'asis'}
+library("knitr")
+kable(aggregate_table_sectors, caption = "Aggregate Table of Job Sectors")
 ```
 
 ## Chart 1 (Sector Bar Chart): 
