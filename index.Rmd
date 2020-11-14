@@ -59,7 +59,18 @@ them were spared from the effects of COVID-19 as all of them were affected to
 a certain extent.
 
 ## Chart 2 (Sector Boxplot): 
-``` 
+``` {r, echo = FALSE}
+ggplot(data = sectors) +
+  geom_boxplot(aes(x = NAICS_SECTOR, y = ESTIMATE_PERCENTAGE,
+                   fill = "orange")) +
+  theme(axis.text.x = element_text(angle = 77, vjust = 0.5),
+        plot.title = element_text(hjust = 0.5)) +
+  labs(
+    title = "Percentage Revenue Changes in Each Sector
+        Week of October 04, 2020",
+    x = "Sector",
+    y = "Percent"
+  )
 ```
 
 This boxplot was generated to further explore the variance within each job 
