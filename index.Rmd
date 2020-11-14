@@ -58,9 +58,24 @@ The chart also shows that within the 5 sectors chosen for the report, none of
 them were spared from the effects of COVID-19 as all of them were affected to
 a certain extent.
 
+## Chart 2 (Sector Boxplot): 
+``` 
+```
 
+This boxplot was generated to further explore the variance within each job 
+sector as well as across each sector as a result of COVID-19 in October.
 
-## Chart 2 (Unemployment Scatter Plot)
+From the plot, we can see how the effect varies across the board, especially
+when comparing with the median of that sector. Utilities had the largest
+variance within the sector, where many businesses had high percentage of being
+effected compared to the sector's median. The entire Management job sector was
+affected the most with almost no outliers, high median percentage of change,
+and high percentage of change for each business in the sector.
+
+Most of other sectors seems to recover from the pandamic, with the median of 
+change falling below 13 percent.
+
+## Chart 3 (Unemployment Scatter Plot)
 ```{r unemployment_plot, echo = FALSE, warning= FALSE}
 ggplot(data = non_seasonal_adjusted, aes(x = Date, y = N.S.A, group = 1)) +
   geom_line() +
