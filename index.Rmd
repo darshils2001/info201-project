@@ -40,6 +40,13 @@ source("scripts/aggregate_table_sector.R")
 library("knitr")
 kable(aggregate_table_sectors, caption = "Aggregate Table of Job Sectors")
 ```
+The Aggregate Table calculates and compares the average, median, minimum, and 
+maximum aggregated percentage change in revenue in each business sector during 
+the week of Oct 04. The table reveals that the average percentage change are 
+constantly higher than the median, implying that there are more businesses having 
+higher percentage of change. There’s also a great difference between the minimum and 
+the maximum percentage of revenue change within each sector, reflecting the various 
+level of impact each business experienced.
 
 ## Chart 1 (Sector Bar Chart): 
 ``` {r average_random_sectors, echo = FALSE}
