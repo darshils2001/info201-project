@@ -17,6 +17,17 @@ myriad job sectors in the United States. We will be looking at which employment
 sectors have been hit the hardest by the virus, and when the worst months
 regarding revenue losses and jobless claims were. 
 
+## Summary 
+
+Of the **19** job sectors in our dataset, all saw revenue changes over the 
+pandemic. During the beginning of the pandemic, with mandatory lockdowns and no 
+stimulus bill on the horizon, both the US and global economies cratered. At its 
+highest, **99.5%** of businesses within a sector were negatively affected by
+COVID-19 in a week; at its lowest, a mere **0.2%** of businesses saw a negative 
+revenue effect. With frequent weekly reports (the information sector has filed
+**104** weekly reports since the pandemic), and a standard error of **19.13**
+- we can see the devastation this pandemic has had on the United States economy.
+
 ```{r setup, include = FALSE}
 source("scripts/Sector_Bar_Chart.R")
 source("scripts/NSA_Unemployment_Scatterplot.R")
