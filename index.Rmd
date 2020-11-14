@@ -31,6 +31,7 @@ revenue effect. With frequent weekly reports (the information sector has filed
 ```{r setup, include = FALSE}
 source("scripts/Sector_Bar_Chart.R")
 source("scripts/NSA_Unemployment_Scatterplot.R")
+source("scripts/sector_boxplot.R")
 ```
 
 ## Chart 1 (Sector Bar Chart): 

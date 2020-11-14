@@ -1,6 +1,3 @@
-#Install packages
-install.packages("ggplot2")
-
 #Load packages
 library("tidyverse")
 library("ggplot2")
