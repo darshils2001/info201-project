@@ -1,5 +1,5 @@
 ---
-title: "Info 201 Project"
+title: "COVID-19 and Small Businesses"
 output: html_document
 ---
 
@@ -40,6 +40,7 @@ source("scripts/aggregate_table_sector.R")
 library("knitr")
 kable(aggregate_table_sectors, caption = "Aggregate Table of Job Sectors")
 ```
+
 The Aggregate Table calculates and compares the average, median, minimum, and 
 maximum aggregated percentage change in revenue in each business sector during 
 the week of Oct 04. The table reveals that the average percentage change are 
