@@ -80,7 +80,9 @@ ggplot(data = sectors) +
   geom_boxplot(aes(x = NAICS_SECTOR, y = ESTIMATE_PERCENTAGE,
                    fill = "orange")) +
   theme(axis.text.x = element_text(angle = 77, vjust = 0.5),
-        plot.title = element_text(hjust = 0.5)) +
+        plot.title = element_text(hjust = 0.5),
+        legend.position = "none",
+        legend.title = element_blank()) +
   labs(
     title = "Percentage Revenue Changes in Each Sector
         Week of October 04, 2020",
