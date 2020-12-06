@@ -34,7 +34,7 @@ conclusion_page <- tabPanel(
 )
 
 intro_page <- tabPanel(
-  titlePanel("Overview and Questions"),
+  "Overview and Questions",
   p("Every individual is experiencing the effects of the Coronavirus pandemic in
 some way, shape, or form, just as we all bear responsibility for slowing its 
 spread. Nine months of lockdown, well over a quarter of a million Americans 
