@@ -61,6 +61,7 @@ States since the beginning of the pandemic.")
 
 my_ui <- navbarPage(
   "COVID-19's effect on American businesses",
+  intro_page,
   sector_chart_page,
   conclusion_page
 )
