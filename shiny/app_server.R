@@ -35,7 +35,7 @@ sectors <- sectors %>%
 
 #Load DoL Unemployment dataset
 unemployment <- read_csv("datasets/DoL_Unemployment.csv") %>% 
-  rename(Date = X1) %>% 
+  rename(Date = X1, S.A.Four = "S.A. 4-Week") %>% 
   mutate(Date = as.Date(Date, format = "%m/%d/%Y"))
 
 #Load COVID-19 Cases dataset
@@ -69,6 +69,34 @@ my_server <- function(input, output) {
       )  
     p <- ggplotly(p)
     p
+  })
+  
+  # Intro text
+  output$intro_text <- renderUI({
+    paragraph_one <- "Every individual is experiencing the effects of the 
+    Coronavirus pandemic in some way, shape, or form, just as we all bear 
+    responsibility for slowing its spread. Nine months of lockdown, well over a 
+    quarter of a million Americans dead, and millions more infected have lead to
+    one of the largest mass casualty events in our history. A brutal virus that
+    relegates individuals to their homes is the enemy of the small business, 
+    with tens of thousands closing in the wake of our economic downturn. This
+    webpage will look at how the Coronavirus Pandemic has affected unemployment 
+    and revenue, and how that effect has been felt across the myriad job sectors 
+    in the United States. We will be looking at which employment sectors have 
+    been hit the hardest by the virus, and when the worst months regarding 
+    revenue losses and jobless claims were"
+    
+    paragraph_two <- "Looking at datasets detailing unemployment claims from the
+    Department of Labor as well as how unemployment and revenue changes have 
+    affected 19 separate employment sectors from the US Census Bureau this 
+    webpage will help provide information on the relationship between job 
+    sectors and the effect COVID-19 has had on them, the variance within each 
+    job sector (as well as across each sector as a result of COVID-19 in 
+    specific months), and the relationship of Non Seasonally Adjusted (NSA) 
+    unemployment claims per week filed in the United States since the beginning 
+    of the pandemic."
+    
+    HTML(paste(paragraph_one, paragraph_two, sep = "<br/><br/>"))
   })
   
   output$sector_text <- renderText({
@@ -107,11 +135,18 @@ my_server <- function(input, output) {
                outro_message, sep = "<br/><br/>"))
   })
   
+  
+  
   # Render unemployment scatterplot
-  output$unemployment_plot <- renderPlot({
-    ggplot(data = unemployment,
-           aes_string(x = "Date", y = "N.S.A", group = 1)) +
-      geom_line() +
-      geom_point()
+  output$unemployment_plot <- renderPlotly({
+    unemployment_plot <- ggplot(data = unemployment,
+      aes_string(x = "Date", y = input$claim_input, group = 1)) +
+        geom_line() +
+        geom_point() +
+        labs(x = "Date",
+          y = names(readable_names[which(readable_names == input$claim_input)]))
+    
+    unemployment_plot <- ggplotly(unemployment_plot)
   })
 }
+
