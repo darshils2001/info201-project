@@ -39,11 +39,8 @@ unemployment <- read_csv("datasets/DoL_Unemployment.csv") %>%
   mutate(Date = as.Date(Date, format = "%m/%d/%Y"))
 
 national <- read.csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us.csv") %>% 
-  filter(date <= "2020-10-10") 
-
-# Combine data
-covid_unemployment <- cbind(unemployment, national) %>% 
-  select(-date)
+  filter(date <= "2020-10-10") %>% 
+  mutate(new_cases = cases - lag(cases, default = 0))
 
 my_server <- function(input, output) {
   output$sector_bar_chart <- renderPlotly({
@@ -139,17 +136,15 @@ my_server <- function(input, output) {
                outro_message, sep = "<br/><br/>"))
   })
   
-  
-  
   # Render unemployment scatterplot
   output$unemployment_plot <- renderPlotly({
-    unemployment_plot <- ggplot(data = covid_unemployment,
+    unemployment_plot <- ggplot(data = unemployment,
       aes_string(x = "Date", y = input$claim_input, group = 1)) +
-      geom_line() +
-      geom_point() +
-        labs(x = "Date",
-          y = names(readable_names[which(readable_names == input$claim_input)]))
-    
+      geom_line(color = "red") +
+      geom_point(color = "red") +
+      labs(x = "Date",
+        y = names(readable_names[which(readable_names == input$claim_input)]))
+             
     unemployment_plot <- ggplotly(unemployment_plot)
   })
 }
