@@ -36,8 +36,11 @@ sector_chart_page <- tabPanel(
 )
 
 # Shiny widgets for unemployment plot page
+
+# Get column names of unemployment dataset (DoL)
 col_names <- colnames(unemployment)
 
+# Convert column names to readable titles
 readable_names <- c(
   "Date" = col_names[1],
   "Non Seasonally Adjusted Filings" = col_names[2],
@@ -47,12 +50,14 @@ readable_names <- c(
   "Covered Employment" = col_names[6]
 )
 
+# Drop down menu to filter by certain unemployment metric
 claim_type_input <- selectInput(
   inputId = "claim_input",
   label = "Select type of unemployment claim",
   choices = readable_names
 )
 
+# Overlay covid 19 cases with unemployment metric
 covid_input <- checkboxInput(
   inputId = "covid_input",
   label = "Overlay COVID Cases",

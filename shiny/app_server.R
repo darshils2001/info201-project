@@ -33,13 +33,17 @@ sectors$NAICS_SECTOR <- gsub(81, "Other Services", sectors$NAICS_SECTOR)
 sectors <- sectors %>% 
   rename(Sector = NAICS_SECTOR)
 
-#Load DoL Unemployment dataset
+#Load DoL Unemployment dataset and COVID-19 Cases dataset
 unemployment <- read_csv("datasets/DoL_Unemployment.csv") %>% 
   rename(Date = X1, S.A.Four = "S.A. 4-Week") %>% 
   mutate(Date = as.Date(Date, format = "%m/%d/%Y"))
 
-#Load COVID-19 Cases dataset
-national <- read.csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us.csv")
+national <- read.csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us.csv") %>% 
+  filter(date <= "2020-10-10") 
+
+# Combine data
+covid_unemployment <- cbind(unemployment, national) %>% 
+  select(-date)
 
 my_server <- function(input, output) {
   output$sector_bar_chart <- renderPlotly({
@@ -139,10 +143,10 @@ my_server <- function(input, output) {
   
   # Render unemployment scatterplot
   output$unemployment_plot <- renderPlotly({
-    unemployment_plot <- ggplot(data = unemployment,
+    unemployment_plot <- ggplot(data = covid_unemployment,
       aes_string(x = "Date", y = input$claim_input, group = 1)) +
-        geom_line() +
-        geom_point() +
+      geom_line() +
+      geom_point() +
         labs(x = "Date",
           y = names(readable_names[which(readable_names == input$claim_input)]))
     
