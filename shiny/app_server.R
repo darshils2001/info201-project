@@ -106,8 +106,7 @@ my_server <- function(input, output) {
     HTML(paste(intro_message, first_takeway, second_takeway, third_takeway,
                outro_message, sep = "<br/><br/>"))
   })
-}
-
+  
   # Render unemployment scatterplot
   output$unemployment_plot <- renderPlot({
     ggplot(data = unemployment,
@@ -115,3 +114,4 @@ my_server <- function(input, output) {
       geom_line() +
       geom_point()
   })
+}
