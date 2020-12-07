@@ -2,26 +2,7 @@ library("shiny")
 
 intro_page <- tabPanel(
   "Overview and Questions",
-  p("Every individual is experiencing the effects of the Coronavirus pandemic in
-some way, shape, or form, just as we all bear responsibility for slowing its 
-spread. Nine months of lockdown, well over a quarter of a million Americans 
-dead, and millions more infected have lead to one of the largest mass casualty 
-events in our history. A brutal virus that relegates individuals to their homes 
-is the enemy of the small business, with tens of thousands closing in the wake
-of our economic downturn. This webpage will look at how the Coronavirus Pandemic 
-has affected unemployment and revenue, and how that effect has been felt across
-the myriad job sectors in the United States. We will be looking at which 
-employment sectors have been hit the hardest by the virus, and when the worst 
-months regarding revenue losses and jobless claims were. 
-
-Looking at datasets detailing unemployment claims from the Department of Labor
-as well as how unemployment and revenue changes have affected 19 separate 
-employment sectors from the US Census Bureau this webpage will help provide 
-information on the relationship between job sectors and the effect COVID-19 has 
-had on them, the variance within each job sector (as well as across each sector 
-as a result of COVID-19 in specific months), and the relationship of Non 
-Seasonally Adjusted (NSA) unemployment claims per week filed in the United 
-States since the beginning of the pandemic.")
+  htmlOutput("intro_text")
   
   # Some additional *flare* will go here
 )
@@ -54,14 +35,40 @@ sector_chart_page <- tabPanel(
   )
 )
 
+# Shiny widgets for unemployment plot page
+col_names <- colnames(unemployment)
+
+readable_names <- c(
+  "Date" = col_names[1],
+  "Non Seasonally Adjusted Filings" = col_names[2],
+  "Seasonal Factors" = col_names[3],
+  "Seasonally Adjusted Filings" = col_names[4],
+  "Seasonally Adjusted 4-week Filings" = col_names[5],
+  "Covered Employment" = col_names[6]
+)
+
+claim_type_input <- selectInput(
+  inputId = "claim_input",
+  label = "Select type of unemployment claim",
+  choices = readable_names
+)
+
+covid_input <- checkboxInput(
+  inputId = "covid_input",
+  label = "Overlay COVID Cases",
+  value = FALSE
+)
+
+
 unemployment_plot_page <- tabPanel(
   "Weekly Unemployment Claims",
   sidebarLayout(
     sidebarPanel(
-      #Widgets
+      claim_type_input,
+      covid_input
     ),
     mainPanel(
-      plotOutput("unemployment_plot")
+      plotlyOutput("unemployment_plot")
     )
   )
 )
@@ -80,3 +87,4 @@ my_ui <- navbarPage(
   unemployment_plot_page,
   conclusion_page
 )
+
