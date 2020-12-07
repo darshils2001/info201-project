@@ -71,4 +71,30 @@ my_server <- function(input, output) {
     
     sector_message
   })
+  
+  output$conclusion_text <- renderUI({
+    intro_message <- "From the information provided in our webpage, it is
+    clear that the COVID-19 pandemic has had a significant effect on businesses
+    in America." 
+    
+    first_takeway <- "We examined the impact on individual job sectors and found
+    that the Management sector was most affected by COVID-19 on an average 
+    weekly percent."
+    
+    second_takeway <- "We also saw that the Utilities sector had the highest 
+    variance in data from the US Census Bureau dataset."
+      
+    third_takeway <- "Finally, we were able to determine that the unemployement
+    claims per week in America in 2020 peaked in March and has been slowly 
+    dropping since then."
+    
+    outro_message <- "In the Overview page we talked about how we wanted to see
+    which employement sectors had been hit hardest by the virus and what months
+    were the worst in terms of lost revenue and jobs. From our analysis, we can
+    see that the Management sector was hit the hardest, and March 2020 was the
+    worst month for unemployement and lost revenue."
+      
+    HTML(paste(intro_message, first_takeway, second_takeway, third_takeway,
+               outro_message, sep = "<br/><br/>"))
+  })
 }

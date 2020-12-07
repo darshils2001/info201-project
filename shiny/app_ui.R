@@ -1,6 +1,5 @@
 library("shiny")
 
-
 sector_chart_page <- tabPanel(
   "Work Sectors",
   titlePanel("COVID-19 and American Work Sectors"),
@@ -30,7 +29,10 @@ sector_chart_page <- tabPanel(
 )
 
 conclusion_page <- tabPanel(
-  "Summary"
+  "Summary",
+  mainPanel(
+    htmlOutput("conclusion_text")
+  )
 )
 
 intro_page <- tabPanel(
