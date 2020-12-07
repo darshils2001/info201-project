@@ -33,6 +33,16 @@ sectors$NAICS_SECTOR <- gsub(81, "Other Services", sectors$NAICS_SECTOR)
 sectors <- sectors %>% 
   rename(Sector = NAICS_SECTOR)
 
+#Load DoL Unemployment dataset
+unemployment <- read_csv("datasets/DoL_Unemployment.csv") %>% 
+  rename(Date = X1) %>% 
+  mutate(Date = as.Date(Date, format = "%m/%d/%Y"))
+
+#Load COVID-19 Cases dataset
+national <- read.csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us.csv")
+
+
+
 my_server <- function(input, output) {
   output$sector_bar_chart <- renderPlotly({
     selected_sectors <- sectors %>% 
@@ -72,6 +82,7 @@ my_server <- function(input, output) {
     sector_message
   })
   
+
   output$conclusion_text <- renderUI({
     intro_message <- "From the information provided in our webpage, it is
     clear that the COVID-19 pandemic has had a significant effect on businesses
@@ -98,3 +109,11 @@ my_server <- function(input, output) {
                outro_message, sep = "<br/><br/>"))
   })
 }
+
+  # Render unemployment scatterplot
+  output$unemployment_plot <- renderPlot({
+    ggplot(data = unemployment,
+           aes_string(x = "Date", y = "N.S.A", group = 1)) +
+      geom_line() +
+      geom_point()
+  })
