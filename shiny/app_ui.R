@@ -1,8 +1,5 @@
 library("shiny")
 
-<<<<<<< HEAD
-=======
-
 intro_page <- tabPanel(
   "Overview and Questions",
   p("Every individual is experiencing the effects of the Coronavirus pandemic in
@@ -29,7 +26,6 @@ States since the beginning of the pandemic.")
   # Some additional *flare* will go here
 )
 
->>>>>>> 24ad1a6766318b22c12a17be293864d4423de01a
 sector_chart_page <- tabPanel(
   "Work Sectors",
   titlePanel("COVID-19 and American Work Sectors"),
@@ -76,8 +72,6 @@ conclusion_page <- tabPanel(
     htmlOutput("conclusion_text")
   )
 )
-
-
 
 my_ui <- navbarPage(
   "COVID-19's effect on American businesses",

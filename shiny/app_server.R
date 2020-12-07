@@ -41,8 +41,6 @@ unemployment <- read_csv("datasets/DoL_Unemployment.csv") %>%
 #Load COVID-19 Cases dataset
 national <- read.csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us.csv")
 
-
-
 my_server <- function(input, output) {
   output$sector_bar_chart <- renderPlotly({
     selected_sectors <- sectors %>% 
