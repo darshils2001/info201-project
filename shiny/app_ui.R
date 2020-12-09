@@ -3,7 +3,8 @@ library("shiny")
 intro_page <- tabPanel(
   "Overview and Questions",
   htmlOutput("intro_text"),
-  htmlOutput("intro_images")
+  #htmlOutput("intro_images")
+  imageOutput("intro_images")
 
 )
 

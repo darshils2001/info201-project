@@ -101,9 +101,15 @@ my_server <- function(input, output) {
     HTML(paste(paragraph_one, paragraph_two, sep = "<br/><br/>"))
   })
   
-  output$intro_images <- renderUI({
-    HTML("<img src = /images/restaurant.jpg>")
-  })
+  output$intro_images <- renderImage({
+    #HTML("<img src = /images/restaurant.jpg>")
+    return(list(
+      src = "/shiny/images/restaurant.jpg",
+      filetype = "image/jpeg",
+      alt = "Businesses are forced to adapt to a pandemic"
+    ) )
+    
+  }, deleteFile = F)
   
   output$sector_text <- renderText({
     sector_message <- "We provided this graph to examine which work sectors
