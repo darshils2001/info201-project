@@ -2,7 +2,7 @@ library("shiny")
 
 intro_page <- tabPanel(
     "Overview and Questions",
-    includeCSS("shiny/style.css"),
+    includeCSS("shiny/Style.css"),
     htmlOutput("intro_text"),
     img(src ="https://assets.weforum.org/article/image/nByQgCfys3NUy7XTobKRIkcTWvkAe0rDWr5X1tNGEIA.JPG",
         width = 990, height = 660)
