@@ -72,7 +72,7 @@ my_server <- function(input, output) {
     p
   })
   
-  # Intro text
+  # Intro text and image
   output$intro_text <- renderUI({
     paragraph_one <- "Every individual is experiencing the effects of the 
     Coronavirus pandemic in some way, shape, or form, just as we all bear 
@@ -98,6 +98,10 @@ my_server <- function(input, output) {
     of the pandemic."
     
     HTML(paste(paragraph_one, paragraph_two, sep = "<br/><br/>"))
+  })
+  
+  output$intro_images <- renderUI({
+    cartoon <- HTML("<img src = /shiny/images/restaurant.jpg>")
   })
   
   output$sector_text <- renderText({

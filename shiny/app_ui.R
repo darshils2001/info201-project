@@ -2,9 +2,9 @@ library("shiny")
 
 intro_page <- tabPanel(
   "Overview and Questions",
-  htmlOutput("intro_text")
-  
-  # Some additional *flare* will go here
+  htmlOutput("intro_text"),
+  htmlOutput("intro_images")
+
 )
 
 sector_chart_page <- tabPanel(
@@ -42,7 +42,6 @@ col_names <- colnames(unemployment)
 
 # Convert column names to readable titles
 readable_names <- c(
-  "Date" = col_names[1],
   "Non Seasonally Adjusted Filings" = col_names[2],
   "Seasonal Factors" = col_names[3],
   "Seasonally Adjusted Filings" = col_names[4],
