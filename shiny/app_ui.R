@@ -39,14 +39,20 @@ sector_chart_page <- tabPanel(
 
 # Get column names of unemployment dataset (DoL)
 col_names <- colnames(unemployment)
+covid_nat_names <- colnames(national)
 
-# Convert column names to readable titles
+# Convert column names to readable titles for both graphs
 readable_names <- c(
   "Non Seasonally Adjusted Filings" = col_names[2],
   "Seasonal Factors" = col_names[3],
   "Seasonally Adjusted Filings" = col_names[4],
   "Seasonally Adjusted 4-week Filings" = col_names[5],
   "Covered Employment" = col_names[6]
+)
+
+covid_names <- c(
+  "Cases" = covid_nat_names[4],
+  "Deaths" = covid_nat_names[5]
 )
 
 # Drop down menu to filter by certain unemployment metric
@@ -57,10 +63,10 @@ claim_type_input <- selectInput(
 )
 
 # Overlay covid 19 cases with unemployment metric
-covid_input <- checkboxInput(
+covid_input <- selectInput(
   inputId = "covid_input",
-  label = "Overlay COVID Cases",
-  value = FALSE
+  label = "Display US Covid Cases or Deaths",
+  choices = covid_names
 )
 
 
@@ -72,7 +78,8 @@ unemployment_plot_page <- tabPanel(
       covid_input
     ),
     mainPanel(
-      plotlyOutput("unemployment_plot")
+      plotlyOutput("unemployment_plot"),
+      plotlyOutput("covid_plot")
     )
   )
 )
