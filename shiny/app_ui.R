@@ -1,12 +1,13 @@
 library("shiny")
 
 intro_page <- tabPanel(
-  "Overview and Questions",
-  htmlOutput("intro_text"),
-  #htmlOutput("intro_images")
-  imageOutput("intro_images")
+    "Overview and Questions",
+    includeCSS("shiny/style.css"),
+    htmlOutput("intro_text"),
+    img(src ="https://assets.weforum.org/article/image/nByQgCfys3NUy7XTobKRIkcTWvkAe0rDWr5X1tNGEIA.JPG",
+        width = 990, height = 660)
+  )
 
-)
 
 sector_chart_page <- tabPanel(
   "Work Sectors",
@@ -93,10 +94,14 @@ conclusion_page <- tabPanel(
 )
 
 my_ui <- navbarPage(
-  "COVID-19's effect on American businesses",
+  "COVID-19's effect on American businesses", 
   intro_page,
-  sector_chart_page,
   unemployment_plot_page,
+  sector_chart_page,
   conclusion_page
-)
+  )
+
+  
+
+
 

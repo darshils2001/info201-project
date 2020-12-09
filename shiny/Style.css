@@ -1,0 +1,23 @@
+body {
+  background-color: #EEEEEE;
+}
+
+.navbar {
+  background-color: #CB4335;
+  font-family: Helvetica;
+  font-size: 15px;
+  color: #383838;
+}
+
+.navbar-dropdown {
+  background-color: #CB4335;
+  font-family: Helvetica;
+  font-size: 15px;
+  color: #383838;
+}
+
+.navbar-default .navbar-brand {
+  color: #383838;
+  font-size: 20px;
+}
+

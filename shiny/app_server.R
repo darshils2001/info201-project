@@ -62,7 +62,7 @@ my_server <- function(input, output) {
     p <- ggplot(data = average_sectors) +
       geom_col(
         mapping = aes(x = Sector, y = Percent),
-        fill = "#FF6666"
+        fill = "#CB4335"
       ) +
       labs(
         title = "Work Sector versus Percent of Businesses Affected by COVID-19",
@@ -100,16 +100,6 @@ my_server <- function(input, output) {
     
     HTML(paste(paragraph_one, paragraph_two, sep = "<br/><br/>"))
   })
-  
-  output$intro_images <- renderImage({
-    #HTML("<img src = /images/restaurant.jpg>")
-    return(list(
-      src = "/shiny/images/restaurant.jpg",
-      filetype = "image/jpeg",
-      alt = "Businesses are forced to adapt to a pandemic"
-    ) )
-    
-  }, deleteFile = F)
   
   output$sector_text <- renderText({
     sector_message <- "We provided this graph to examine which work sectors
@@ -151,8 +141,8 @@ my_server <- function(input, output) {
   output$unemployment_plot <- renderPlotly({
     unemployment_plot <- ggplot(data = unemployment,
       aes_string(x = "Date", y = input$claim_input, group = 1)) +
-      geom_line(color = "#FF6666") +
-      geom_point(color = "#FF6666") +
+      geom_line(color = "#CB4335") +
+      geom_point(color = "#CB4335") +
       labs(title = "US Unemployment Claims Per Week",
         x = "Date",
         y = names(readable_names[which(readable_names == input$claim_input)]))
@@ -164,7 +154,7 @@ my_server <- function(input, output) {
   output$covid_plot <- renderPlotly({
     covid_plot <- ggplot(data = national,
       aes_string(x = "date", y = input$covid_input, group = 1)) +
-      geom_line(color = "#FF6666") +
+      geom_line(color = "#CB4335") +
       labs(title = "US Coronavirus Figures",
            x = "Date",
            y = names(covid_names[which(covid_names == input$covid_input)]))
