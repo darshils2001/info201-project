@@ -1,5 +1,6 @@
 library("shiny")
 
+## Intro Tab ##
 intro_page <- tabPanel(
     "Overview and Questions",
     includeCSS("shiny/Style.css"),
@@ -9,7 +10,7 @@ intro_page <- tabPanel(
         width = 990, height = 660)
   )
 
-
+## Sector Chart Tab ##
 sector_chart_page <- tabPanel(
   "Work Sectors",
   titlePanel("COVID-19 and American Work Sectors"),
@@ -38,6 +39,9 @@ sector_chart_page <- tabPanel(
   )
 )
 
+
+
+## Unemployement Plot tab ##
 # Shiny widgets for unemployment plot page
 
 # Get column names of unemployment dataset (DoL)
@@ -72,7 +76,6 @@ covid_input <- selectInput(
   choices = covid_names
 )
 
-
 unemployment_plot_page <- tabPanel(
   "Weekly Unemployment Claims",
   sidebarLayout(
@@ -91,6 +94,45 @@ unemployment_plot_page <- tabPanel(
   )
 )
 
+## Boxplot Tab ##
+sector_distribution_page <- tabPanel(
+  "Sector Distribution",
+  # Sidebar with a selectInput for the variable for analysis
+  sidebarLayout(
+    # 1st column
+    sidebarPanel(
+      selectInput(
+        inputId = "work_sectors",
+        label = strong("Work Sectors"),
+        multiple = TRUE,
+        choices = unique(sectors$Sector)
+      )
+    ),
+    
+    # Display output - the visualization in the main panel, 2nd column
+    mainPanel(
+      h3("Sector Statistics"),
+      plotlyOutput("sector_boxplot"),
+      p("This boxplot was generated to further explore the variance within each
+        job sector as well as across each sector as a result of COVID-19 in
+        October. User can select sector(s) by typing the sector(s) 
+        they want to see the statistics for."),
+      p(""),
+      p("From the plot, we can see how the effect varies across the board,
+      especially when comparing with the median of that sector.
+      Utilities had the largest variance within the sector, where many
+      businesses had high percentage of being effected compared to the
+      sector’s median. The entire Management job sector was affected the most
+      with almost no outliers, high median percentage of change, and
+      high percentage of change for each business in the sector."),
+      p(""),
+      p("Most of other sectors seems to recover from the pandamic,
+      with the median of change falling below 13 percent.")
+    )
+  )
+)
+
+## Conclusion tab ##
 conclusion_page <- tabPanel(
   "Summary",
   mainPanel(
@@ -98,11 +140,13 @@ conclusion_page <- tabPanel(
   )
 )
 
+## Define UI##
 my_ui <- navbarPage(
   "COVID-19's effect on American businesses", 
   intro_page,
   unemployment_plot_page,
   sector_chart_page,
+  sector_distribution_page,
   conclusion_page
   )
 
