@@ -4,6 +4,7 @@ intro_page <- tabPanel(
     "Overview and Questions",
     includeCSS("shiny/Style.css"),
     htmlOutput("intro_text"),
+    br(),
     img(src ="https://assets.weforum.org/article/image/nByQgCfys3NUy7XTobKRIkcTWvkAe0rDWr5X1tNGEIA.JPG",
         width = 990, height = 660)
   )
@@ -81,7 +82,11 @@ unemployment_plot_page <- tabPanel(
     ),
     mainPanel(
       plotlyOutput("unemployment_plot"),
-      plotlyOutput("covid_plot")
+      #br(),
+      textOutput("unemployment_text"),
+      br(),
+      plotlyOutput("covid_plot"),
+      textOutput("covid_text")
     )
   )
 )

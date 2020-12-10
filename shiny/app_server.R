@@ -161,6 +161,31 @@ my_server <- function(input, output) {
     
     covid_plot <- ggplotly(covid_plot)
   })
+  
+  # Render paragraph explaining unemployment graph purpose
+  output$unemployment_text <- renderText({
+    nsa_comp <- "The Non-seasonal factors - or essentially the \"raw\" 
+    unemployment data shows how the beginning of the pandemic (correlative to 
+    the first \"spike\" in US cases) was particularly brutal for US unemployment
+    filings, peaking at 6.2 million on April 4th. When the raw data is adjusted
+    by seasonal factors (to give us the Seasonally Adjusted Filings), the peak
+    shifts to the week of May 28th, immediately prior the April 4th peak of the
+    NSA filings."
+    
+    nsa_comp
+  })
+  
+  # Paragraph explaining covid graph purpose
+  output$covid_text <- renderText({
+    covid_comp <- "A testimate to a collosal failure of leadership, the US 
+    coronavirus case numbers reflect the disregard for human life and a lack of 
+    mitigation efforts by our federal government. The reason for the 
+    near-immediate decline in unemployment filings was due to congressional 
+    stimulus and deficit spending. But the pros of Keynesian Economics is for a
+    different presentation."
+    
+    covid_comp
+  })
 }
 
 
