@@ -7,6 +7,7 @@ library("dplyr")
 library("plotly")
 library("lintr")
 library("styler")
+library("scales")
 
 ### Load Datasets ###
 
@@ -51,7 +52,7 @@ national <- read.csv("https://raw.githubusercontent.com/nytimes/covid-19-data/ma
 
 ### Define server ###
 my_server <- function(input, output) {
-  
+
   ## Intro text and image ##
   output$intro_text <- renderUI({
     paragraph_one <- "Every individual is experiencing the effects of the
@@ -61,14 +62,14 @@ my_server <- function(input, output) {
     one of the largest mass casualty events in our history. A brutal virus that
     relegates individuals to their homes is the enemy of the small business,
     with tens of thousands closing in the wake of our economic downturn. This
-    webpage will look at how the Coronavirus Pandemic has affected unemployment 
+    webpage will look at how the Coronavirus Pandemic has affected unemployment
     and revenue, and how that effect has been felt across the myriad job sectors
     in the United States. We will be looking at which employment sectors have
     been hit the hardest by the virus, and when the worst months regarding
     revenue losses and jobless claims were"
-    
+
     paragraph_two <- "Looking at datasets detailing unemployment claims from the
-    Department of Labor as well as how unemployment and revenue changes have 
+    Department of Labor as well as how unemployment and revenue changes have
     affected 19 separate employment sectors from the US Census Bureau this
     webpage will help provide information on the relationship between job
     sectors and the effect COVID-19 has had on them, the variance within each
@@ -76,10 +77,10 @@ my_server <- function(input, output) {
     specific months), and the relationship of Non Seasonally Adjusted (NSA)
     unemployment claims per week filed in the United States since the beginning
     of the pandemic."
-    
+
     HTML(paste(paragraph_one, paragraph_two, sep = "<br/><br/>"))
   })
-  
+
   ## Render unemployment scatterplot ##
   output$unemployment_plot <- renderPlotly({
     unemployment_plot <- ggplot(
@@ -92,11 +93,12 @@ my_server <- function(input, output) {
         title = "US Unemployment Claims Per Week",
         x = "Date",
         y = names(readable_names[which(readable_names == input$claim_input)])
-      )
-    
+      ) +
+      scale_y_continuous(labels = comma)
+
     unemployment_plot <- ggplotly(unemployment_plot)
   })
-  
+
   ## Render COVID plot ##
   output$covid_plot <- renderPlotly({
     covid_plot <- ggplot(
@@ -109,10 +111,10 @@ my_server <- function(input, output) {
         x = "Date",
         y = names(covid_names[which(covid_names == input$covid_input)])
       )
-    
+
     covid_plot <- ggplotly(covid_plot)
   })
-  
+
   ## Render paragraph explaining unemployment graph purpose ##
   output$unemployment_text <- renderText({
     nsa_comp <- "The Non-seasonal factors - or essentially the \"raw\"
@@ -122,10 +124,10 @@ my_server <- function(input, output) {
     by seasonal factors (to give us the Seasonally Adjusted Filings), the peak
     shifts to the week of May 28th, immediately prior the April 4th peak of the
     NSA filings."
-    
+
     nsa_comp
   })
-  
+
   ## Paragraph explaining covid graph purpose ##
   output$covid_text <- renderText({
     covid_comp <- "A testimate to a collosal failure of leadership, the US
@@ -134,10 +136,10 @@ my_server <- function(input, output) {
     near-immediate decline in unemployment filings was due to congressional
     stimulus and deficit spending. But the pros of Keynesian Economics is for a
     different presentation."
-    
+
     covid_comp
   })
-  
+
   ## Sector Bar Chart ##
   output$sector_bar_chart <- renderPlotly({
     selected_sectors <- sectors %>%
@@ -167,13 +169,13 @@ my_server <- function(input, output) {
     p <- ggplotly(p)
     p
   })
-  
+
   output$sector_text <- renderText({
     sector_message <- "We provided this graph to examine which work sectors
     were hit the hardest by the COVID-19 pandemic. You can choose however many
     work sectors you want to look at from the provided list and note the
     differences among them."
-    
+
     sector_message
   })
 
@@ -235,7 +237,7 @@ my_server <- function(input, output) {
     in America."
 
     first_takeway <- "We examined the impact on individual job sectors and found
-    that the Management sector was most affected by COVID-19 on an average 
+    that the Management sector was most affected by COVID-19 on an average
     weekly percent."
 
     second_takeway <- "We also saw that the Utilities sector had the highest

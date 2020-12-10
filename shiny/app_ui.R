@@ -4,13 +4,15 @@ library("styler")
 
 ## Intro Tab ##
 intro_page <- tabPanel(
-    "Overview and Questions",
-    includeCSS("shiny/Style.css"),
-    htmlOutput("intro_text"),
-    br(),
-    img(src ="https://assets.weforum.org/article/image/nByQgCfys3NUy7XTobKRIkcTWvkAe0rDWr5X1tNGEIA.JPG",
-        width = 990, height = 660)
+  "Overview and Questions",
+  includeCSS("shiny/Style.css"),
+  htmlOutput("intro_text"),
+  br(),
+  img(
+    src = "https://assets.weforum.org/article/image/nByQgCfys3NUy7XTobKRIkcTWvkAe0rDWr5X1tNGEIA.JPG",
+    width = 990, height = 660
   )
+)
 
 ## Unemployment Plot tab ##
 
@@ -67,7 +69,7 @@ unemployment_plot_page <- tabPanel(
 sector_chart_page <- tabPanel(
   "Work Sectors",
   titlePanel("COVID-19 and American Work Sectors"),
-  
+
   sidebarLayout(
     sidebarPanel(
       selectInput(
@@ -83,7 +85,7 @@ sector_chart_page <- tabPanel(
         )
       )
     ),
-    
+
     mainPanel(
       plotlyOutput("sector_bar_chart"),
       br(),
@@ -97,29 +99,29 @@ sector_distribution_page <- tabPanel(
   "Sector Distribution",
   # Sidebar with a selectInput for the variable for analysis
   sidebarLayout(
-      sidebarPanel(
-        selectInput(
-          inputId = "sector_choice",
-          label = "Work Sectors",
-          multiple = TRUE,
-          choices = c(
-            "Mining", "Utilities", "Construction", "Manufacturing",
-            "Wholesale Trade", "Retail Trade", "Transportation", "Information",
-            "Finance", "Real Estate", "Professional Services", "Management",
-            "Administrative Services", "Educational Services", "Health Care",
-            "Entertainment", "Food Services", "Other Services"
-          ),
-          selected = "Management"
-        )
-      ),
-    
+    sidebarPanel(
+      selectInput(
+        inputId = "sector_choice",
+        label = "Work Sectors",
+        multiple = TRUE,
+        choices = c(
+          "Mining", "Utilities", "Construction", "Manufacturing",
+          "Wholesale Trade", "Retail Trade", "Transportation", "Information",
+          "Finance", "Real Estate", "Professional Services", "Management",
+          "Administrative Services", "Educational Services", "Health Care",
+          "Entertainment", "Food Services", "Other Services"
+        ),
+        selected = "Management"
+      )
+    ),
+
     # Display output - the visualization in the main panel, 2nd column
     mainPanel(
       plotlyOutput("sector_boxplot"),
       br(),
       htmlOutput("boxplot_text")
-      )
     )
+  )
 )
 
 ## Conclusion tab ##
@@ -139,4 +141,4 @@ my_ui <- navbarPage(
   sector_chart_page,
   sector_distribution_page,
   conclusion_page
-  )
+)
