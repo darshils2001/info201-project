@@ -35,7 +35,7 @@ sector_chart_page <- tabPanel(
       plotlyOutput("sector_bar_chart"),
       br(),
       textOutput("sector_text"),
-      plotlyOutput("sector_boxplot")  ##### HERE #####
+      plotlyOutput("sector_boxplot")  ##### HERE
     )
   )
 )
@@ -152,7 +152,7 @@ my_ui <- navbarPage(
   intro_page,
   unemployment_plot_page,
   sector_chart_page,
-  sector_distribution_page,
+  #sector_distribution_page,
   conclusion_page
   )
 
