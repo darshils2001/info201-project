@@ -51,6 +51,93 @@ national <- read.csv("https://raw.githubusercontent.com/nytimes/covid-19-data/ma
 
 ### Define server ###
 my_server <- function(input, output) {
+  
+  ## Intro text and image ##
+  output$intro_text <- renderUI({
+    paragraph_one <- "Every individual is experiencing the effects of the
+    Coronavirus pandemic in some way, shape, or form, just as we all bear
+    responsibility for slowing its spread. Nine months of lockdown, well over a
+    quarter of a million Americans dead, and millions more infected have lead to
+    one of the largest mass casualty events in our history. A brutal virus that
+    relegates individuals to their homes is the enemy of the small business,
+    with tens of thousands closing in the wake of our economic downturn. This
+    webpage will look at how the Coronavirus Pandemic has affected unemployment 
+    and revenue, and how that effect has been felt across the myriad job sectors
+    in the United States. We will be looking at which employment sectors have
+    been hit the hardest by the virus, and when the worst months regarding
+    revenue losses and jobless claims were"
+    
+    paragraph_two <- "Looking at datasets detailing unemployment claims from the
+    Department of Labor as well as how unemployment and revenue changes have 
+    affected 19 separate employment sectors from the US Census Bureau this
+    webpage will help provide information on the relationship between job
+    sectors and the effect COVID-19 has had on them, the variance within each
+    job sector (as well as across each sector as a result of COVID-19 in
+    specific months), and the relationship of Non Seasonally Adjusted (NSA)
+    unemployment claims per week filed in the United States since the beginning
+    of the pandemic."
+    
+    HTML(paste(paragraph_one, paragraph_two, sep = "<br/><br/>"))
+  })
+  
+  ## Render unemployment scatterplot ##
+  output$unemployment_plot <- renderPlotly({
+    unemployment_plot <- ggplot(
+      data = unemployment,
+      aes_string(x = "Date", y = input$claim_input, group = 1)
+    ) +
+      geom_line(color = "#CB4335") +
+      geom_point(color = "#CB4335") +
+      labs(
+        title = "US Unemployment Claims Per Week",
+        x = "Date",
+        y = names(readable_names[which(readable_names == input$claim_input)])
+      )
+    
+    unemployment_plot <- ggplotly(unemployment_plot)
+  })
+  
+  ## Render COVID plot ##
+  output$covid_plot <- renderPlotly({
+    covid_plot <- ggplot(
+      data = national,
+      aes_string(x = "date", y = input$covid_input, group = 1)
+    ) +
+      geom_line(color = "#CB4335") +
+      labs(
+        title = "US Coronavirus Figures",
+        x = "Date",
+        y = names(covid_names[which(covid_names == input$covid_input)])
+      )
+    
+    covid_plot <- ggplotly(covid_plot)
+  })
+  
+  ## Render paragraph explaining unemployment graph purpose ##
+  output$unemployment_text <- renderText({
+    nsa_comp <- "The Non-seasonal factors - or essentially the \"raw\"
+    unemployment data shows how the beginning of the pandemic (correlative to
+    the first \"spike\" in US cases) was particularly brutal for US unemployment
+    filings, peaking at 6.2 million on April 4th. When the raw data is adjusted
+    by seasonal factors (to give us the Seasonally Adjusted Filings), the peak
+    shifts to the week of May 28th, immediately prior the April 4th peak of the
+    NSA filings."
+    
+    nsa_comp
+  })
+  
+  ## Paragraph explaining covid graph purpose ##
+  output$covid_text <- renderText({
+    covid_comp <- "A testimate to a collosal failure of leadership, the US
+    coronavirus case numbers reflect the disregard for human life and a lack of
+    mitigation efforts by our federal government. The reason for the
+    near-immediate decline in unemployment filings was due to congressional
+    stimulus and deficit spending. But the pros of Keynesian Economics is for a
+    different presentation."
+    
+    covid_comp
+  })
+  
   ## Sector Bar Chart ##
   output$sector_bar_chart <- renderPlotly({
     selected_sectors <- sectors %>%
@@ -80,9 +167,17 @@ my_server <- function(input, output) {
     p <- ggplotly(p)
     p
   })
+  
+  output$sector_text <- renderText({
+    sector_message <- "We provided this graph to examine which work sectors
+    were hit the hardest by the COVID-19 pandemic. You can choose however many
+    work sectors you want to look at from the provided list and note the
+    differences among them."
+    
+    sector_message
+  })
 
   ## Sector Box Plot ##
-
   output$sector_boxplot <- renderPlotly({
     selected_sectors <- sectors %>%
       filter(Sector %in% input$sector_choice)
@@ -113,43 +208,6 @@ my_server <- function(input, output) {
 
     p <- ggplotly(p)
     p
-  })
-
-  ## Intro text and image ##
-  output$intro_text <- renderUI({
-  paragraph_one <- "Every individual is experiencing the effects of the
-    Coronavirus pandemic in some way, shape, or form, just as we all bear
-    responsibility for slowing its spread. Nine months of lockdown, well over a
-    quarter of a million Americans dead, and millions more infected have lead to
-    one of the largest mass casualty events in our history. A brutal virus that
-    relegates individuals to their homes is the enemy of the small business,
-    with tens of thousands closing in the wake of our economic downturn. This
-    webpage will look at how the Coronavirus Pandemic has affected unemployment 
-    and revenue, and how that effect has been felt across the myriad job sectors
-    in the United States. We will be looking at which employment sectors have
-    been hit the hardest by the virus, and when the worst months regarding
-    revenue losses and jobless claims were"
-
-    paragraph_two <- "Looking at datasets detailing unemployment claims from the
-    Department of Labor as well as how unemployment and revenue changes have 
-    affected 19 separate employment sectors from the US Census Bureau this
-    webpage will help provide information on the relationship between job
-    sectors and the effect COVID-19 has had on them, the variance within each
-    job sector (as well as across each sector as a result of COVID-19 in
-    specific months), and the relationship of Non Seasonally Adjusted (NSA)
-    unemployment claims per week filed in the United States since the beginning
-    of the pandemic."
-
-    HTML(paste(paragraph_one, paragraph_two, sep = "<br/><br/>"))
-  })
-
-  output$sector_text <- renderText({
-    sector_message <- "We provided this graph to examine which work sectors
-    were hit the hardest by the COVID-19 pandemic. You can choose however many
-    work sectors you want to look at from the provided list and note the
-    differences among them."
-
-    sector_message
   })
 
   output$boxplot_text <- renderUI({
@@ -197,63 +255,5 @@ my_server <- function(input, output) {
       outro_message,
       sep = "<br/><br/>"
     ))
-  })
-
-  ## Render unemployment scatterplot ##
-  output$unemployment_plot <- renderPlotly({
-    unemployment_plot <- ggplot(
-      data = unemployment,
-      aes_string(x = "Date", y = input$claim_input, group = 1)
-    ) +
-      geom_line(color = "#CB4335") +
-      geom_point(color = "#CB4335") +
-      labs(
-        title = "US Unemployment Claims Per Week",
-        x = "Date",
-        y = names(readable_names[which(readable_names == input$claim_input)])
-      )
-
-    unemployment_plot <- ggplotly(unemployment_plot)
-  })
-
-  ## Render COVID plot ##
-  output$covid_plot <- renderPlotly({
-    covid_plot <- ggplot(
-      data = national,
-      aes_string(x = "date", y = input$covid_input, group = 1)
-    ) +
-      geom_line(color = "#CB4335") +
-      labs(
-        title = "US Coronavirus Figures",
-        x = "Date",
-        y = names(covid_names[which(covid_names == input$covid_input)])
-      )
-
-    covid_plot <- ggplotly(covid_plot)
-  })
-
-  ## Render paragraph explaining unemployment graph purpose ##
-  output$unemployment_text <- renderText({
-    nsa_comp <- "The Non-seasonal factors - or essentially the \"raw\"
-    unemployment data shows how the beginning of the pandemic (correlative to
-    the first \"spike\" in US cases) was particularly brutal for US unemployment
-    filings, peaking at 6.2 million on April 4th. When the raw data is adjusted
-    by seasonal factors (to give us the Seasonally Adjusted Filings), the peak
-    shifts to the week of May 28th, immediately prior the April 4th peak of the
-    NSA filings."
-
-    nsa_comp
-  })
-
-  ## Paragraph explaining covid graph purpose ##
-  output$covid_text <- renderText({
-    covid_comp <- "A testimate to a collosal failure of leadership, the US
-    coronavirus case numbers reflect the disregard for human life and a lack of
-    mitigation efforts by our federal government. The reason for the
-    near-immediate decline in unemployment filings was due to congressional
-    stimulus and deficit spending. But the pros of Keynesian Economics is for a
-    different presentation."
-
-    covid_comp
   })
 }

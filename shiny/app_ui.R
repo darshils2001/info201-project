@@ -12,8 +12,7 @@ intro_page <- tabPanel(
         width = 990, height = 660)
   )
 
-## Unemployement Plot tab ##
-# Shiny widgets for unemployment plot page
+## Unemployment Plot tab ##
 
 # Get column names of unemployment dataset (DoL)
 col_names <- colnames(unemployment)
