@@ -1,4 +1,4 @@
-# Load Packages
+#### Load Packages ###
 library("readxl")
 library("ggplot2")
 library("tidyverse")
@@ -6,7 +6,9 @@ library("shiny")
 library("dplyr")
 library("plotly")
 
-# Load Datasets
+### Load Datasets ###
+
+## Load Sector Dataset ##
 sectors <- read_excel("datasets/National_Sector_Dataset.xls")
 
 # Convert Sector Numbers to Names
@@ -33,7 +35,7 @@ sectors$NAICS_SECTOR <- gsub(81, "Other Services", sectors$NAICS_SECTOR)
 sectors <- sectors %>% 
   rename(Sector = NAICS_SECTOR)
 
-#Load DoL Unemployment dataset and COVID-19 Cases dataset
+## Load DoL Unemployment dataset and COVID-19 Cases dataset ##
 unemployment <- read_csv("datasets/DoL_Unemployment.csv") %>% 
   rename(Date = X1, S.A.Four = "S.A. 4-Week") %>% 
   mutate(Date = as.Date(Date, format = "%m/%d/%Y"))
@@ -43,7 +45,9 @@ national <- read.csv("https://raw.githubusercontent.com/nytimes/covid-19-data/ma
   mutate(new_cases = cases - lag(cases, default = 0),
          new_deaths = deaths - lag(deaths, default = 0)) 
 
+### Define server ###
 my_server <- function(input, output) {
+  ## Sector Bar Chart ##
   output$sector_bar_chart <- renderPlotly({
     selected_sectors <- sectors %>% 
       filter(Sector %in% input$work_sectors)
@@ -73,7 +77,28 @@ my_server <- function(input, output) {
     p
   })
   
-  # Intro text and image
+  ## Sector Box Plot ##
+   output$sector_boxplot <- renderPlotly({
+    selected_sectors <- sectors %>%
+      filter(Sector %in% input$work_sectors) %>%
+
+    #Build a box plot to compare variance across the sectors
+    sector_boxplot <- ggplot(data = sectors) +
+      geom_boxplot(mapping = aes(x = Sector, y = ESTIMATE_PERCENTAGE),
+                       fill = "orange") +
+      theme(axis.text.x = element_text(angle = 77, vjust = 0.5),
+            plot.title = element_text(hjust = 0.5),
+            legend.position = "none",
+            legend.title = element_blank())
+        labs(
+          title = "Percentage Revenue Changes in Each Sector
+              Week of October 04, 2020",
+          x = "Sector",
+          y = "Percent")
+   sector_boxplot<- ggplotly(sector_boxplot)
+   sector_boxplot
+  
+  ## Intro text and image ##
   output$intro_text <- renderUI({
     paragraph_one <- "Every individual is experiencing the effects of the 
     Coronavirus pandemic in some way, shape, or form, just as we all bear 
@@ -137,7 +162,7 @@ my_server <- function(input, output) {
                outro_message, sep = "<br/><br/>"))
   })
   
-  # Render unemployment scatterplot
+  ## Render unemployment scatterplot ##
   output$unemployment_plot <- renderPlotly({
     unemployment_plot <- ggplot(data = unemployment,
       aes_string(x = "Date", y = input$claim_input, group = 1)) +
@@ -150,7 +175,7 @@ my_server <- function(input, output) {
     unemployment_plot <- ggplotly(unemployment_plot)
   })
   
-  # Render COVID plot
+  ## Render COVID plot ##
   output$covid_plot <- renderPlotly({
     covid_plot <- ggplot(data = national,
       aes_string(x = "date", y = input$covid_input, group = 1)) +
@@ -162,7 +187,7 @@ my_server <- function(input, output) {
     covid_plot <- ggplotly(covid_plot)
   })
   
-  # Render paragraph explaining unemployment graph purpose
+  ## Render paragraph explaining unemployment graph purpose ##
   output$unemployment_text <- renderText({
     nsa_comp <- "The Non-seasonal factors - or essentially the \"raw\" 
     unemployment data shows how the beginning of the pandemic (correlative to 
@@ -175,7 +200,7 @@ my_server <- function(input, output) {
     nsa_comp
   })
   
-  # Paragraph explaining covid graph purpose
+  ## Paragraph explaining covid graph purpose ##
   output$covid_text <- renderText({
     covid_comp <- "A testimate to a collosal failure of leadership, the US 
     coronavirus case numbers reflect the disregard for human life and a lack of 
@@ -187,6 +212,3 @@ my_server <- function(input, output) {
     covid_comp
   })
 }
-
-
-
