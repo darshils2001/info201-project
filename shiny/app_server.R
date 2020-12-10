@@ -79,24 +79,26 @@ my_server <- function(input, output) {
   
   ## Sector Box Plot ##
    output$sector_boxplot <- renderPlotly({
-    selected_sectors <- sectors %>%
-      filter(Sector %in% input$work_sectors) %>%
-
-    #Build a box plot to compare variance across the sectors
-    sector_boxplot <- ggplot(data = sectors) +
-      geom_boxplot(mapping = aes(x = Sector, y = ESTIMATE_PERCENTAGE),
-                       fill = "orange") +
-      theme(axis.text.x = element_text(angle = 77, vjust = 0.5),
-            plot.title = element_text(hjust = 0.5),
-            legend.position = "none",
-            legend.title = element_blank())
-        labs(
-          title = "Percentage Revenue Changes in Each Sector
-              Week of October 04, 2020",
-          x = "Sector",
-          y = "Percent")
-   sector_boxplot<- ggplotly(sector_boxplot)
-   sector_boxplot
+     selected_sectors <- sectors %>% 
+       filter(Sector %in% input$work_sectors)
+     
+     # Find average % in each sector
+     selected_sectors$ESTIMATE_PERCENTAGE <- as.numeric(
+       gsub("[\\%,]", "", selected_sectors$ESTIMATE_PERCENTAGE)
+     )
+     
+     average_sectors <- selected_sectors %>%
+       group_by(Sector)
+       
+     
+     p <- ggplot(data = average_sectors) +
+       geom_boxplot(
+         mapping = aes(x = Sector, y = ESTIMATE_PERCENTAGE),
+         fill = "#CB4335"
+       ) 
+     p <- ggplotly(p)
+     p
+   })
   
   ## Intro text and image ##
   output$intro_text <- renderUI({

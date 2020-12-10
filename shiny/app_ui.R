@@ -34,7 +34,8 @@ sector_chart_page <- tabPanel(
     mainPanel(
       plotlyOutput("sector_bar_chart"),
       br(),
-      textOutput("sector_text")
+      textOutput("sector_text"),
+      plotlyOutput("sector_boxplot")  ##### HERE #####
     )
   )
 )
@@ -85,7 +86,6 @@ unemployment_plot_page <- tabPanel(
     ),
     mainPanel(
       plotlyOutput("unemployment_plot"),
-      #br(),
       textOutput("unemployment_text"),
       br(),
       plotlyOutput("covid_plot"),
@@ -105,7 +105,13 @@ sector_distribution_page <- tabPanel(
         inputId = "work_sectors",
         label = strong("Work Sectors"),
         multiple = TRUE,
-        choices = unique(sectors$Sector)
+        choices = c(
+          "Mining", "Utilities", "Construction", "Manufacturing",
+          "Wholesale Trade", "Retail Trade", "Transportation", "Information",
+          "Finance", "Real Estate", "Professional Services", "Management",
+          "Administrative Services", "Educational Services", "Health Care",
+          "Entertainment", "Food Services", "Other Services"
+        )
       )
     ),
     
