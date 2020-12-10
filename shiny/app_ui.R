@@ -1,4 +1,6 @@
 library("shiny")
+library("lintr")
+library("styler")
 
 ## Intro Tab ##
 intro_page <- tabPanel(
@@ -9,38 +11,6 @@ intro_page <- tabPanel(
     img(src ="https://assets.weforum.org/article/image/nByQgCfys3NUy7XTobKRIkcTWvkAe0rDWr5X1tNGEIA.JPG",
         width = 990, height = 660)
   )
-
-## Sector Chart Tab ##
-sector_chart_page <- tabPanel(
-  "Work Sectors",
-  titlePanel("COVID-19 and American Work Sectors"),
-  
-  sidebarLayout(
-    sidebarPanel(
-      selectInput(
-        inputId = "work_sectors",
-        label = "Work Sectors",
-        multiple = TRUE,
-        choices = c(
-          "Mining", "Utilities", "Construction", "Manufacturing",
-          "Wholesale Trade", "Retail Trade", "Transportation", "Information",
-          "Finance", "Real Estate", "Professional Services", "Management",
-          "Administrative Services", "Educational Services", "Health Care",
-          "Entertainment", "Food Services", "Other Services"
-        )
-      )
-    ),
-    
-    mainPanel(
-      plotlyOutput("sector_bar_chart"),
-      br(),
-      textOutput("sector_text"),
-      plotlyOutput("sector_boxplot")  ##### HERE
-    )
-  )
-)
-
-
 
 ## Unemployement Plot tab ##
 # Shiny widgets for unemployment plot page
@@ -94,16 +64,16 @@ unemployment_plot_page <- tabPanel(
   )
 )
 
-## Boxplot Tab ##
-sector_distribution_page <- tabPanel(
-  "Sector Distribution",
-  # Sidebar with a selectInput for the variable for analysis
+## Sector Chart Tab ##
+sector_chart_page <- tabPanel(
+  "Work Sectors",
+  titlePanel("COVID-19 and American Work Sectors"),
+  
   sidebarLayout(
-    # 1st column
     sidebarPanel(
       selectInput(
         inputId = "work_sectors",
-        label = strong("Work Sectors"),
+        label = "Work Sectors",
         multiple = TRUE,
         choices = c(
           "Mining", "Utilities", "Construction", "Manufacturing",
@@ -115,27 +85,42 @@ sector_distribution_page <- tabPanel(
       )
     ),
     
-    # Display output - the visualization in the main panel, 2nd column
     mainPanel(
-      h3("Sector Statistics"),
-      plotlyOutput("sector_boxplot"),
-      p("This boxplot was generated to further explore the variance within each
-        job sector as well as across each sector as a result of COVID-19 in
-        October. User can select sector(s) by typing the sector(s) 
-        they want to see the statistics for."),
-      p(""),
-      p("From the plot, we can see how the effect varies across the board,
-      especially when comparing with the median of that sector.
-      Utilities had the largest variance within the sector, where many
-      businesses had high percentage of being effected compared to the
-      sector’s median. The entire Management job sector was affected the most
-      with almost no outliers, high median percentage of change, and
-      high percentage of change for each business in the sector."),
-      p(""),
-      p("Most of other sectors seems to recover from the pandamic,
-      with the median of change falling below 13 percent.")
+      plotlyOutput("sector_bar_chart"),
+      br(),
+      textOutput("sector_text")
     )
   )
+)
+
+## Boxplot Tab ##
+sector_distribution_page <- tabPanel(
+  "Sector Distribution",
+  # Sidebar with a selectInput for the variable for analysis
+  sidebarLayout(
+      sidebarPanel(
+        selectInput(
+          inputId = "sector_choice",
+          label = "Work Sectors",
+          multiple = TRUE,
+          choices = c(
+            "Mining", "Utilities", "Construction", "Manufacturing",
+            "Wholesale Trade", "Retail Trade", "Transportation", "Information",
+            "Finance", "Real Estate", "Professional Services", "Management",
+            "Administrative Services", "Educational Services", "Health Care",
+            "Entertainment", "Food Services", "Other Services"
+          ),
+          selected = "Management"
+        )
+      ),
+    
+    # Display output - the visualization in the main panel, 2nd column
+    mainPanel(
+      plotlyOutput("sector_boxplot"),
+      br(),
+      htmlOutput("boxplot_text")
+      )
+    )
 )
 
 ## Conclusion tab ##
@@ -148,15 +133,11 @@ conclusion_page <- tabPanel(
 
 ## Define UI##
 my_ui <- navbarPage(
-  "COVID-19's effect on American businesses", 
+  "COVID-19's Effect on American Businesses",
+  inverse = TRUE,
   intro_page,
   unemployment_plot_page,
   sector_chart_page,
-  #sector_distribution_page,
+  sector_distribution_page,
   conclusion_page
   )
-
-  
-
-
-
